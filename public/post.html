@@ -6,17 +6,18 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1 id="post-title"></h1>
-    <p id="post-content"></p>
-    <button onclick="window.location.href='forum.html'">게시판으로 돌아가기</button>
-    <h2>댓글</h2>
-    <div id="comments"></div>
-    <form id="commentForm">
-        <label for="commentContent">내용:</label>
-        <textarea id="commentContent" name="commentContent" required></textarea><br>
-        <button type="button" onclick="createComment()">댓글 작성</button>
-    </form>
+    <div class="container">
+        <h1 id="post-title"></h1>
+        <p id="post-content"></p>
+        <button onclick="window.location.href='forum.html'">게시판으로 돌아가기</button>
+        <h2>댓글</h2>
+        <div id="comments"></div>
+        <form id="commentForm">
+            <label for="commentContent">내용:</label>
+            <textarea id="commentContent" name="commentContent" required></textarea>
+            <button type="button" onclick="createComment()">댓글 작성</button>
+        </form>
+    </div>
     <script src="main.js"></script>
 </body>
 </html>
-

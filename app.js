@@ -7,7 +7,6 @@ const session = require('express-session');
 const app = express();
 const db = new sqlite3.Database('./db/database.sqlite');
 
-// 미들웨어 설정
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.use(session({
@@ -16,38 +15,6 @@ app.use(session({
     saveUninitialized: true
 }));
 
-// 테이블 생성 (존재하지 않는 경우)
-db.serialize(() => {
-    db.run(`CREATE TABLE IF NOT EXISTS Members (
-        MemberID INTEGER PRIMARY KEY AUTOINCREMENT,
-        Name TEXT NOT NULL,
-        Password TEXT NOT NULL,
-        PhoneNumber TEXT NOT NULL,
-        Nickname TEXT NOT NULL,
-        Email TEXT NOT NULL
-    )`);
-
-    db.run(`CREATE TABLE IF NOT EXISTS Posts (
-        PostID INTEGER PRIMARY KEY AUTOINCREMENT,
-        MemberID INTEGER,
-        Content TEXT NOT NULL,
-        Title TEXT NOT NULL,
-        CreatedDate TEXT NOT NULL,
-        FOREIGN KEY (MemberID) REFERENCES Members (MemberID)
-    )`);
-
-    db.run(`CREATE TABLE IF NOT EXISTS Comments (
-        CommentID INTEGER PRIMARY KEY AUTOINCREMENT,
-        PostID INTEGER,
-        MemberID INTEGER,
-        Content TEXT NOT NULL,
-        CreatedDate TEXT NOT NULL,
-        FOREIGN KEY (PostID) REFERENCES Posts (PostID),
-        FOREIGN KEY (MemberID) REFERENCES Members (MemberID)
-    )`);
-});
-
-// 라우트 설정
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'main.html'));
 });
@@ -65,6 +32,13 @@ app.get('/forum.html', (req, res) => {
         return res.redirect('/login.html');
     }
     res.sendFile(path.join(__dirname, 'public', 'forum.html'));
+});
+
+app.get('/create-post.html', (req, res) => {
+    if (!req.session.memberId) {
+        return res.redirect('/login.html');
+    }
+    res.sendFile(path.join(__dirname, 'public', 'create-post.html'));
 });
 
 app.get('/post.html', (req, res) => {

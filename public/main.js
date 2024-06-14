@@ -69,7 +69,7 @@ function createComment() {
         } else {
             alert("댓글 작성 실패");
         }
-    });
+    }).catch(err => console.error('Error:', err));
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -81,17 +81,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('post-title').innerText = data.title;
                 document.getElementById('post-content').innerText = data.content;
                 const commentsDiv = document.getElementById('comments');
+                commentsDiv.innerHTML = ''; // Clear previous comments
                 data.comments.forEach(comment => {
                     const p = document.createElement('p');
                     p.innerText = comment.content;
                     commentsDiv.appendChild(p);
                 });
-            });
+            }).catch(err => console.error('Error:', err));
     } else if (window.location.pathname === '/forum.html') {
         fetch('/posts')
             .then(response => response.json())
             .then(posts => {
                 const postsDiv = document.getElementById('posts');
+                postsDiv.innerHTML = ''; // Clear previous posts
                 posts.forEach(post => {
                     const postLink = document.createElement('a');
                     postLink.href = `post.html?postId=${post.postId}`;
@@ -99,6 +101,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     postsDiv.appendChild(postLink);
                     postsDiv.appendChild(document.createElement('br'));
                 });
-            });
+            }).catch(err => console.error('Error:', err));
     }
 });

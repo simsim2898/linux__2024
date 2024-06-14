@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>글 작성</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>글 작성</h1>
+        <form id="postForm">
+            <label for="title">제목:</label>
+            <input type="text" id="title" name="title" required>
+            <label for="content">내용:</label>
+            <textarea id="content" name="content" required></textarea>
+            <button type="button" onclick="createPost()">게시</button>
+        </form>
+        <button onclick="window.location.href='forum.html'">돌아가기</button>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>
