@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>커뮤니티</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>자유게시판</h1>
+    <button onclick="logout()">로그아웃</button>
+    <div id="posts"></div>
+    <form id="postForm">
+        <label for="title">제목:</label>
+        <input type="text" id="title" name="title" required><br>
+        <label for="content">내용:</label>
+        <textarea id="content" name="content" required></textarea><br>
+        <button type="button" onclick="createPost()">게시</button>
+    </form>
+    <script src="main.js"></script>
+</body>
+</html>
