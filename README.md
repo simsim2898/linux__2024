@@ -28,7 +28,7 @@ CreatedDate: 댓글 작성 날짜
 
 # 디렉토리 구조
 
-/project-root
+/project-linux
 │
 ├── /public
 │   ├── main.html
